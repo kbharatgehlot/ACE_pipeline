@@ -19,7 +19,7 @@ ms_data.load_datacolumn(columnname='DATA',read_weights=True,attribute_name='mrdo
 
 print(ms_data.mrdoctor.shape)
 print(dir(ms_data))
-quality_stats = QualityStatistics.load_from_ms(filename)
+quality_stats = load_from_ms(filename)
 print(quality_stats.stats_name)
 print(quality_stats.bl_stats['RFICount'].shape)
 print(quality_stats.time_stats['RFICount'].shape)
