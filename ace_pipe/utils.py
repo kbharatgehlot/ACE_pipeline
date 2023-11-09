@@ -130,3 +130,17 @@ def load_moments_from_h5(filename):
     except FileNotFoundError:
         print('{} file does not exist'.format(filename))
         raise
+
+
+def save_flags_to_h5(msname, h5_filename, flags, ant1, ant2, nbls, ntimes, nfreqs, info):
+    with h5py.File(msname + '/' + h5_filename, 'w') as h5_file:
+        meta_group = h5_file.create_group('metadata')
+        meta_group.create_dataset('ant1', data=ant1)
+        meta_group.create_dataset('ant2', data=ant2)
+        meta_group.create_dataset('nbls', data=nbls)
+        meta_group.create_dataset('ntimes', data=ntimes)
+        meta_group.create_dataset('nfreqs', data=nfreqs)
+        meta_group.create_dataset('info', data=info + ' for MS:{}'.format(msname))
+        h5_file.create_dataset('flags', data=flags)
+
+    print("flags written to: {}".format(h5_filename))

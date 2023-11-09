@@ -19,6 +19,8 @@ class MSData(object):
         nfreqs: int
             number of frequency channels in the data.
 
+        npols: int
+            number of correlations (polarizations) in the data.
         nbls: int
             number of unique baselines (including auto-correlations).
 
@@ -42,7 +44,7 @@ class MSData(object):
 
     """
 
-    def __init__(self, filename, uvw, times, freqs, ant1, ant2, ntimes, nfreqs, nbls, nants, columns):
+    def __init__(self, filename, uvw, times, freqs, ant1, ant2, ntimes, nfreqs, npols, nbls, nants, columns):
 
         """Create a new MSData object, with default attributes"""
 
@@ -56,6 +58,7 @@ class MSData(object):
         self.ntimes = ntimes
         self.nfreqs = nfreqs
         self.nbls = nbls
+        self.npols = npols
         self.nants = nants
         self.columns = columns
 
@@ -93,6 +96,9 @@ class MSData(object):
                     freqs = spw.getcol('CHAN_FREQ').squeeze()
                     nfreqs = len(freqs)
 
+                with tbl.table(msobj.getkeyword('POLARIZATION'), readonly=True, ack=False) as pol:
+                    npols = pol.getcol('NUM_CORR').squeeze()
+
                 uvw = msobj.getcol('UVW').reshape(ntimes, -1, 3)
                 nbls = uvw.shape[1]
 
@@ -100,7 +106,7 @@ class MSData(object):
                 ant2 = (msobj.getcol('ANTENNA2')).reshape(ntimes, -1)[0]
                 nants = len(np.unique(ant1))
 
-                msdata_obj = MSData(msname, uvw, times, freqs, ant1, ant2, ntimes, nfreqs, nbls, nants, columns)
+                msdata_obj = MSData(msname, uvw, times, freqs, ant1, ant2, ntimes, nfreqs, npols, nbls, nants, columns)
 
                 if read_flags:
                     msdata_obj.read_flags()
