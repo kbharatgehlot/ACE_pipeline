@@ -2,7 +2,6 @@ import numpy as np
 from tqdm import tqdm
 from copy import copy
 
-
 def flag_bad_baselines(bad_baselines, flags, ant1, ant2):
     updated_flags = copy(flags)
     for i, bl_pair in enumerate(tqdm(bad_baselines)):

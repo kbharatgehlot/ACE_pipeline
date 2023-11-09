@@ -1,14 +1,12 @@
 # noinspection PyPackageRequirements
 import os
-from typing import List, Tuple, Any
-
 import numpy as np
 import casacore.tables as tbl
-from tqdm import tqdm, trange
+from tqdm import tqdm
 import h5py
 import warnings
-from copy import copy, deepcopy
-from ACE_pipe import utils
+from copy import copy
+from ace_pipe import utils
 import astropy.stats as astrostats
 
 
