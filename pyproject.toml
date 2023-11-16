@@ -2,7 +2,7 @@
 name = "ace_pipeline"
 version = "0.1.0"
 description = ""
-authors = ["Bharat Gehlot gehlot@astro.rug.nl"]
+authors = ["Bharat Gehlot <gehlot@astro.rug.nl>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
